@@ -5,11 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detox Dashboard</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+
   <style>
-    /* General Styles */
     body {
       font-family: 'Orbitron', sans-serif;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
@@ -19,23 +21,66 @@
       overflow-x: hidden;
     }
 
-    /* Navbar Styles */
+    /* Sidebar styles */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 15px 25px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      color: white;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      background-color: #00cccc;
+      color: black;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .hamburger {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: white;
+      padding: 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: none;
+    }
+
+    /* Navbar styles for desktop */
     .navbar-custom {
       background: linear-gradient(90deg, #00ffff, #00e6e6, #00cccc);
       padding: 1rem 2rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      animation: slideInDown 1s;
     }
 
     .navbar-custom .navbar-nav {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px; /* Space between links */
-    }
-
-    .navbar-custom .nav-item {
-      position: relative;
+      gap: 20px;
     }
 
     .navbar-custom .nav-link {
@@ -78,7 +123,17 @@
       font-weight: bold;
     }
 
-    /* Dashboard Styles */
+    /* Hide navbar and show hamburger on small screens */
+    @media screen and (max-width: 768px) {
+      .navbar-custom {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
     .dashboard {
       text-align: center;
       padding: 60px 20px;
@@ -148,7 +203,26 @@
 </head>
 
 <body>
-  <!-- Navbar -->
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <a href="home.html">Home</a>
+    <a href="challenge.html">Challenge</a>
+    <a href="journal.html">Journal</a>
+    <a href="mood.html">Mood Chart</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Hamburger Icon -->
+  <div class="hamburger" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- Full Navbar (shown on desktop only) -->
   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
       <ul class="navbar-nav d-flex align-items-center">
@@ -200,18 +274,18 @@
     <div class="streak">Play, reflect, repeat. Detox with purpose! 🌟</div>
   </div>
 
+  <!-- Scripts -->
   <script>
-    // JavaScript to Dynamically Update Streak Count
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+    }
+
     const streakCountElement = document.getElementById('streak-count');
     const streakMessageElement = document.getElementById('streak-message');
-
-    // Retrieve streak count from localStorage
     let streakCount = parseInt(localStorage.getItem('streakCount')) || 0;
-
-    // Update the streak count on the dashboard
     streakCountElement.textContent = streakCount;
 
-    // Optionally, customize the message based on streak length
     if (streakCount === 0) {
       streakMessageElement.textContent = "Start your detox streak today!";
     } else if (streakCount === 1) {
@@ -220,6 +294,6 @@
       streakMessageElement.textContent = `You're on a ${streakCount}-day detox streak! Keep going!`;
     }
   </script>
-</body>
 
+</body>
 </html>

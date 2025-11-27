@@ -6,6 +6,8 @@
   <title>Quiz – Swipe Less, Live More</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+
   <style>
     /* General Styles */
     body {
@@ -137,8 +139,21 @@
 <body>
 
   <!-- 🌐 Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid justify-content-center">
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand d-lg-none" href="#">ReVibe</a>
+
+    <!-- Hamburger Icon -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible Menu -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
+      <!-- Close Button (only on mobile) -->
+      <button type="button" class="btn-close ms-auto d-lg-none mb-3" aria-label="Close" id="closeMenuBtn"></button>
+
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="challenge.html">Challenge</a></li>
@@ -146,12 +161,12 @@
         <li class="nav-item"><a class="nav-link" href="mood.html">Mood Chart</a></li>
         <li class="nav-item"><a class="nav-link active" href="quiz.html">Quiz</a></li>
         <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
-
         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
 
   <!-- 📄 Quiz Content -->
@@ -308,5 +323,19 @@
       setTimeout(() => clearInterval(interval), 15000);
     }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const closeBtn = document.getElementById('closeMenuBtn');
+    const menu = document.getElementById('navbarContent');
+
+    if (closeBtn && menu) {
+      closeBtn.addEventListener('click', function () {
+        const collapse = bootstrap.Collapse.getInstance(menu) || new bootstrap.Collapse(menu, { toggle: false });
+        collapse.hide();
+      });
+    }
+  });
+</script>
 </body>
 </html>

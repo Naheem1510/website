@@ -8,6 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+
   <style>
     /* General Styles */
     body {
@@ -175,12 +177,25 @@
   <!-- Header -->
   <header>
     <h1>ReVibe</h1>
-    <p>Your 7-Day Social Media Detox Challenge</p>
+    <p>Your Social Media Detox Friend</p>
   </header>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid justify-content-center">
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand d-lg-none" href="#">ReVibe</a>
+
+    <!-- Hamburger Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible Content -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
+      <!-- Close Button (Only visible on small screens) -->
+      <button type="button" class="btn-close ms-auto d-lg-none mb-2" aria-label="Close" id="closeMenuBtn"></button>
+
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="challenge.html">Challenge</a></li>
@@ -192,7 +207,11 @@
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+
+
+
 
   <!-- Hero Section -->
   <section class="hero-section">
@@ -315,6 +334,19 @@
     ];
     document.getElementById("daily-tip").textContent = tips[Math.floor(Math.random() * tips.length)];
   </script>
+  <script>
+  document.getElementById('closeMenuBtn').addEventListener('click', function () {
+    const menu = document.getElementById('navbarContent');
+    const collapseInstance = bootstrap.Collapse.getInstance(menu);
+    if (collapseInstance) {
+      collapseInstance.hide(); // Close the menu if already initialized
+    } else {
+      // Initialize and hide if not already initialized
+      new bootstrap.Collapse(menu).hide();
+    }
+  });
+</script>
+
 </body>
 </html>
 
